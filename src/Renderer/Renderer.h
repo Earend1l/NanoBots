@@ -10,8 +10,8 @@ class Renderer
     public:
         Renderer(std::vector<EntityAdapter> *entities);
         virtual ~Renderer();
-
-        void renderOneFrame();
+        sf::RenderWindow* getRenderWindow();
+        bool renderOneFrame();
     protected:
     private:
         sf::RenderWindow* m_window;
