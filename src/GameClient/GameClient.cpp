@@ -29,13 +29,12 @@ GameClient::~GameClient()
     {
         delete (m_entities[i]);
     }
-    delete mapLoader;
 }
 
 void GameClient::start()
 {
-    MapLoader* mapLoader = new MapLoader();
-    mapLoader->loadMap("data/map.bmp");
+    MapLoader mapLoader;
+    mapLoader.loadMap("data/map.bmp");
 
     sf::Clock clock;
     clock.restart();
