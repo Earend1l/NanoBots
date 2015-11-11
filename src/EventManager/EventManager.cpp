@@ -12,7 +12,7 @@ EventManager::~EventManager()
     //dtor
 }
 
-void EventManager::processEvent(sf::Time elapsedTime)
+void EventManager::processEvent(float elapsedTime)
 {
     sf::Event event;
 
@@ -37,8 +37,8 @@ void EventManager::processEvent(sf::Time elapsedTime)
         }
     }
 
-    (*m_entities)[0]->applyImpulse(sf::Keyboard::isKeyPressed(sf::Keyboard::D)*elapsedTime.asSeconds()
-                                      -sf::Keyboard::isKeyPressed(sf::Keyboard::Q)*elapsedTime.asSeconds(),
-                                  (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)*elapsedTime.asSeconds()
-                                      -sf::Keyboard::isKeyPressed(sf::Keyboard::S)*elapsedTime.asSeconds()));
+    (*m_entities)[0]->applyImpulse(sf::Keyboard::isKeyPressed(sf::Keyboard::D)*elapsedTime
+                                      -sf::Keyboard::isKeyPressed(sf::Keyboard::Q)*elapsedTime,
+                                  (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)*elapsedTime
+                                      -sf::Keyboard::isKeyPressed(sf::Keyboard::S)*elapsedTime));
 }

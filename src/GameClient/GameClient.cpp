@@ -2,6 +2,10 @@
 
 GameClient::GameClient()
 {
+    #ifdef DEBUG
+        std::cout << __func__ << " called" << std::endl;
+    #endif
+
     m_physicEngine = new PhysicEngine();
     m_renderer = new Renderer(&m_entities);
     m_playerController = new PlayerController();
@@ -15,36 +19,32 @@ GameClient::GameClient()
 
 GameClient::~GameClient()
 {
-    std::cout << "GameClient : destructor called" << std::endl;
+    std::cout << __func__ << " called" <<std::endl;
     delete m_physicEngine;
     delete m_renderer;
     delete m_playerController;
     delete m_eventManager;
+
+    for (int i=0 ; i<m_entities.size() ; i++)
+    {
+        delete (m_entities[i]);
+    }
 }
 
 void GameClient::start()
 {
-    /*EntityCreator* entityCreator = EntityCreator::getInstance();
-    entityCreator->addEntity(9, 5, 0, "test");
-    entityCreator->addEntity(0, 5, 0, "player");
-    entityCreator->addEntity(1, 9, 0, "player");
-    entityCreator->addEntity(-1, 12, 0, "player");
-    entityCreator->addEntity(0, -3, 0, "test");
-    entityCreator->addEntity(-2, -3, 0, "test");
-    entityCreator->addEntity(2, -3, 0, "test");
-    entityCreator->addEntity(4, -4, 0, "test");
-    entityCreator->addEntity(6, -4, 0, "test");*/
-
     MapLoader* mapLoader = new MapLoader();
     mapLoader->loadMap("data/map.bmp");
     delete mapLoader;
 
     sf::Clock clock;
-
+    clock.restart();
+    float time = 0;
     while (running)
     {
+        m_physicEngine->update(time);
         running = m_renderer->renderOneFrame();
-        m_eventManager->processEvent(clock.getElapsedTime());
-        m_physicEngine->update(clock.restart().asSeconds());
+        m_eventManager->processEvent(time);
+        time = clock.restart().asSeconds();
     }
 }

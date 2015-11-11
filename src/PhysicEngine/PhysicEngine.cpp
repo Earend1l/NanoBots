@@ -4,10 +4,15 @@ using namespace std;
 
 PhysicEngine::PhysicEngine()
 {
+    #ifdef DEBUG
+        std::cout << __func__ << " called" << std::endl;
+    #endif
+
     b2Vec2 g;
     g.x=0.0;
     g.y=-10.0;
     m_world = new b2World(g);
+    m_elapsedTime = 0;
 }
 
 PhysicEngine::~PhysicEngine()
@@ -62,15 +67,12 @@ b2Body* PhysicEngine::addB2Body(string entityType)
         std::cout<<"PhysicEngine : Box2d file not found" << std::endl;
 
 
-    std::flush(std::cout);
-
     return b2body;
 }
 
 void PhysicEngine::update(float elapsedTime)
 {
     m_elapsedTime += elapsedTime;
-
     while (m_elapsedTime > TIME_GAP)
     {
         m_elapsedTime -= TIME_GAP;

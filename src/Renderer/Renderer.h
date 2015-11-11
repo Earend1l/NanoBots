@@ -8,7 +8,7 @@
 class Renderer
 {
     public:
-        Renderer(std::vector<EntityAdapter> *entities);
+        Renderer(std::vector<EntityAdapter*> *entities);
         virtual ~Renderer();
         sf::RenderWindow* getRenderWindow();
         bool renderOneFrame();
@@ -16,7 +16,7 @@ class Renderer
     private:
         sf::RenderWindow* m_window;
         sf::View m_view;
-        std::vector<EntityAdapter> *m_entities;
+        std::vector<EntityAdapter*> *m_entities;
 };
 
 #endif // RENDERER_H

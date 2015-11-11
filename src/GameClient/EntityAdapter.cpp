@@ -24,7 +24,7 @@ EntityAdapter::~EntityAdapter()
 {
     //dtor
     //Texture delete by resources manager
-    //std::cout << "EntityAdapter : destructor called" << std::endl;
+    std::cout << __func__ << " called" <<std::endl;
 }
 
 void EntityAdapter::draw(sf::RenderTarget &target, sf::RenderStates states) const

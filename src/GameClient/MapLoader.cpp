@@ -2,11 +2,17 @@
 
 MapLoader::MapLoader()
 {
-    //ctor
+    #ifdef DEBUG
+        std::cout << __func__ << " called" << std::endl;
+    #endif
 }
 
 void MapLoader::loadMap(std::string nomFichier)
 {
+    #ifdef DEBUG
+        std::cout << __func__ << " called" << std::endl;
+    #endif
+
     EntityCreator *entityCreator = EntityCreator::getInstance();
     sf::Color matterColor = sf::Color::Black;
     sf::Color energyColor = sf::Color::White;

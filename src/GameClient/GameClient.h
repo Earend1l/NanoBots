@@ -19,7 +19,7 @@ class GameClient
         void start();
     protected:
     private:
-        std::vector<EntityAdapter> m_entities;
+        std::vector<EntityAdapter*> m_entities;
         PhysicEngine *m_physicEngine;
         Renderer *m_renderer;
         PlayerController *m_playerController;

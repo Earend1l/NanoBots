@@ -10,7 +10,7 @@ class EntityCreator
 {
     public:
         static EntityCreator* getInstance();
-        void init(std::vector<EntityAdapter> *m_entities, PhysicEngine* physicEngine);
+        void init(std::vector<EntityAdapter*> *m_entities, PhysicEngine* physicEngine);
         void addEntity(float positionX, float positionY, float angle, std::string type);
         static EntityCreator* GetInstance();
     protected:
@@ -20,7 +20,7 @@ class EntityCreator
 
         static EntityCreator* m_instance;
 
-        std::vector<EntityAdapter> *m_entities;
+        std::vector<EntityAdapter*> *m_entities;
         PhysicEngine *m_physicEngine;
 };
 

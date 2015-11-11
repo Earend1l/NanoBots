@@ -9,15 +9,15 @@
 class EventManager
 {
     public:
-        EventManager(sf::RenderWindow *window, PlayerController *playerController, std::vector<EntityAdapter>* entities);
+        EventManager(sf::RenderWindow *window, PlayerController *playerController, std::vector<EntityAdapter*>* entities);
         virtual ~EventManager();
 
-        void processEvent(sf::Time elapsedTime);
+        void processEvent(float elapsedTime);
     protected:
     private:
         sf::RenderWindow *m_window;
         PlayerController *m_playerController;
-        std::vector<EntityAdapter>* m_entities;
+        std::vector<EntityAdapter*>* m_entities;
 
 };
 
