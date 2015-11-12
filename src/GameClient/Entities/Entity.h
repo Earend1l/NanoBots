@@ -8,7 +8,7 @@ class Entity
     public:
         Entity(int energy, int matter);
         virtual ~Entity();
-        virtual void onCollide(Entity *Ent2) =0;
+        virtual void onCollide(Entity &Ent2) =0;
         std::string getType();
     protected:
         int m_energy;

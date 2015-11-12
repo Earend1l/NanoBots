@@ -9,7 +9,7 @@ class Player : public Entity
 {
     public:
         Player(std::string pseudo);
-        void onCollide(Entity *Ent2);
+        void onCollide(Entity &Ent2);
         virtual ~Player();
     protected:
     private:
