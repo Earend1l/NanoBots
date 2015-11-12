@@ -1,6 +1,6 @@
 #include "MapLoader.h"
 
-MapLoader::MapLoader()
+MapLoader::MapLoader(EntityCreator &entityCreator) : m_entityCreator(entityCreator)
 {
     #ifdef DEBUG
         std::cout << __func__ << " called" << std::endl;
@@ -13,10 +13,10 @@ void MapLoader::loadMap(std::string nomFichier)
         std::cout << __func__ << " called" << std::endl;
     #endif
 
-    EntityCreator *entityCreator = EntityCreator::getInstance();
     sf::Color matterColor = sf::Color::Black;
     sf::Color energyColor = sf::Color::White;
     sf::Color playerColor = sf::Color::Green;
+
     sf::Image img;
     if (img.loadFromFile(nomFichier))
     {
@@ -26,15 +26,15 @@ void MapLoader::loadMap(std::string nomFichier)
             {
                 if (img.getPixel(x, y) == matterColor)
                 {
-                    entityCreator->addEntity(x, -1*y, 0, "matter");
+                    m_entityCreator.addEntity(x, -1*y, 0, "matter");
                 }
                 else if (img.getPixel(x, y) == energyColor)
                 {
-                    entityCreator->addEntity(x, -1*y, 0, "energy");
+                    m_entityCreator.addEntity(x, -1*y, 0, "energy");
                 }
                 else if (img.getPixel(x, y) == playerColor)
                 {
-                    entityCreator->addEntity(x, -1*y, 0, "player");
+                    m_entityCreator.addEntity(x, -1*y, 0, "player");
                 }
             }
         }

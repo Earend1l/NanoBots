@@ -1,19 +1,13 @@
 #include "EntityAdapter.h"
 
-EntityAdapter::EntityAdapter(float positionX, float positionY, float angle, std::string entityName, b2Body& body) : m_body(body)
+EntityAdapter::EntityAdapter(float positionX, float positionY, float angle, std::string entityName, b2Body& body) :
+                            m_body(body),
+                            m_texture(ResourcesManager::getInstance().getTexture(entityName))
 {
-    //TODO change default loader
-    m_texture = new sf::Texture();
-    ResourcesManager::getInstance()->addTexture(m_texture);
     m_drawBoundingBox=false;
 
-    std::string path = "data/entities/"+entityName+"/texture";
 
-    if (!m_texture->loadFromFile(path))
-        std::cout << "Unable to open : \"data/tile.png\" " << std::endl;
-
-    m_sprite.setTexture(*m_texture);
-    m_texture->setSmooth(false);
+    m_sprite.setTexture(m_texture);
     m_sprite.setOrigin(m_sprite.getTextureRect().width/2.0, m_sprite.getTextureRect().height/2.0);
 
     m_body.SetTransform(b2Vec2(positionX, positionY), angle);

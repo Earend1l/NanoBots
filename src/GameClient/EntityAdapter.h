@@ -35,7 +35,7 @@ class EntityAdapter : public sf::Drawable
 
         //SFML Adapter
             sf::Sprite m_sprite;
-            sf::Texture *m_texture;
+            sf::Texture &m_texture;
 
         //Box2D Adapter
         b2Body &m_body;

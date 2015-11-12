@@ -1,6 +1,6 @@
 #include "ResourcesManager.h"
 
-ResourcesManager* ResourcesManager::instance = new ResourcesManager();
+ResourcesManager ResourcesManager::instance;
 
 ResourcesManager::ResourcesManager()
 {
@@ -9,19 +9,23 @@ ResourcesManager::ResourcesManager()
 
 ResourcesManager::~ResourcesManager()
 {
-    //dtor
-    for (unsigned int i=0 ; i<m_textures.size() ; i++)
-    {
-        delete m_textures[i];
-    }
 }
 
-ResourcesManager* ResourcesManager::getInstance()
+ResourcesManager& ResourcesManager::getInstance()
 {
     return instance;
 }
 
-void ResourcesManager::addTexture (sf::Texture* texture)
+sf::Texture& ResourcesManager::getTexture(std::string entityName)
 {
-    m_textures.push_back(texture);
+    auto it = m_textures.find(entityName);
+
+    if (it == m_textures.end())
+    {
+        std::string path = "data/entities/"+entityName+"/texture";
+        m_textures.insert(std::make_pair<std::string,sf::Texture>("eggs",sf::Texture()));
+        m_textures[entityName].loadFromFile(path);
+    }
+
+    return m_textures[entityName];
 }

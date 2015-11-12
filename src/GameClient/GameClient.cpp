@@ -2,12 +2,6 @@
 
 GameClient::GameClient() : m_playerController(), m_renderer(m_entities), m_eventManager(m_renderer.getRenderWindow(), m_playerController, m_entities)
 {
-    #ifdef DEBUG
-        std::cout << __func__ << " called" << std::endl;
-    #endif
-
-    EntityCreator::getInstance()->init(&m_entities, &m_physicEngine);
-    EntityCreator::getInstance()->addEntity(1, 1, 0,  "player");
 }
 
 GameClient::~GameClient()
@@ -16,7 +10,10 @@ GameClient::~GameClient()
 
 void GameClient::start()
 {
-    MapLoader mapLoader;
+    EntityCreator entityCreator(m_entities, m_physicEngine);
+    entityCreator.addEntity(1, 1, 0,  "player");
+
+    MapLoader mapLoader(entityCreator);
     mapLoader.loadMap("data/map.bmp");
 
     sf::Clock clock;

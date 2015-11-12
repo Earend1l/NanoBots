@@ -6,9 +6,10 @@
 #include "PhysicEngine.h"
 #include "PlayerController.h"
 #include "EventManager.h"
+#include "MapLoader.h"
 #include "EntityCreator.h"
 
-#include "MapLoader.h"
+
 #include <list>
 
 class GameClient

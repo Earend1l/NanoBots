@@ -1,27 +1,22 @@
 #ifndef ENTITYCREATOR_H
 #define ENTITYCREATOR_H
 
-#include "Entity.h"
-#include "GameClient.h"
 #include "PhysicEngine.h"
 #include <Box2D/Box2D.h>
+#include "EntityAdapter.h"
+#include <list>
 
 class EntityCreator
 {
     public:
-        static EntityCreator* getInstance();
-        void init(std::list<EntityAdapter> *m_entities, PhysicEngine* physicEngine);
-        void addEntity(float positionX, float positionY, float angle, std::string type);
-        static EntityCreator* GetInstance();
-    protected:
-    private:
-        EntityCreator();
+        EntityCreator(std::list<EntityAdapter> &entities, PhysicEngine& physicEngine);
         virtual ~EntityCreator();
 
-        static EntityCreator* m_instance;
-
-        std::list<EntityAdapter> *m_entities;
-        PhysicEngine *m_physicEngine;
+        void addEntity(float positionX, float positionY, float angle, std::string type);
+    protected:
+    private:
+        std::list<EntityAdapter> &m_entities;
+        PhysicEngine &m_physicEngine;
 };
 
 #endif // ENTITYCREATOR_H
