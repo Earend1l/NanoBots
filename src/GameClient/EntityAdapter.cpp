@@ -1,6 +1,6 @@
 #include "EntityAdapter.h"
 
-EntityAdapter::EntityAdapter(float positionX, float positionY, float angle, std::string entityName, b2Body* body)
+EntityAdapter::EntityAdapter(float positionX, float positionY, float angle, std::string entityName, b2Body& body) : m_body(body)
 {
     //TODO change default loader
     m_texture = new sf::Texture();
@@ -16,8 +16,7 @@ EntityAdapter::EntityAdapter(float positionX, float positionY, float angle, std:
     m_texture->setSmooth(false);
     m_sprite.setOrigin(m_sprite.getTextureRect().width/2.0, m_sprite.getTextureRect().height/2.0);
 
-    m_body=body;
-    m_body->SetTransform(b2Vec2(positionX, positionY), angle);
+    m_body.SetTransform(b2Vec2(positionX, positionY), angle);
 }
 
 EntityAdapter::~EntityAdapter()
@@ -48,14 +47,11 @@ void EntityAdapter::draw(sf::RenderTarget &target, sf::RenderStates states) cons
 
 void EntityAdapter::updatePos()
 {
-    if (m_body)
-    {
-        b2Vec2 pos = m_body->GetPosition();
-        m_sprite.setPosition(pos.x * PIXELS_PER_METER, -1*pos.y * PIXELS_PER_METER);
+    b2Vec2 pos = m_body.GetPosition();
+    m_sprite.setPosition(pos.x * PIXELS_PER_METER, -1*pos.y * PIXELS_PER_METER);
 
-        float angle = m_body->GetAngle();
-        m_sprite.setRotation(-1*angle*180/3.1415926535);
-    }
+    float angle = m_body.GetAngle();
+    m_sprite.setRotation(-1*angle*180/3.1415926535);
 }
 
 void EntityAdapter::applyImpulse(float x, float y)
@@ -63,5 +59,5 @@ void EntityAdapter::applyImpulse(float x, float y)
     b2Vec2 vec;
     vec.x =x*100;
     vec.y = y*100.0;
-    m_body->ApplyLinearImpulse(vec, m_body->GetWorldCenter(), true);
+    m_body.ApplyLinearImpulse(vec, m_body.GetWorldCenter(), true);
 }

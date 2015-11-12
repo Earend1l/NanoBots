@@ -1,10 +1,9 @@
 #include "EventManager.h"
 
-EventManager::EventManager(sf::RenderWindow *window, PlayerController *playerController, std::vector<EntityAdapter*>* entities)
+EventManager::EventManager(sf::RenderWindow &window, PlayerController &playerController, std::list<EntityAdapter>& entities) :
+                            m_window(window), m_playerController(playerController), m_entities(entities)
 {
-    m_window = window;
-    m_playerController = playerController;
-    m_entities = entities; //TODO delete this shit
+
 }
 
 EventManager::~EventManager()
@@ -17,14 +16,14 @@ void EventManager::processEvent(float elapsedTime)
     sf::Event event;
 
     // while there are pending events...
-    while (m_window->pollEvent(event))
+    while (m_window.pollEvent(event))
     {
         // check the type of the event...
         switch (event.type)
         {
             // window closed
             case sf::Event::Closed:
-                m_window->close();
+                m_window.close();
                 break;
 
             // key pressed
@@ -37,8 +36,8 @@ void EventManager::processEvent(float elapsedTime)
         }
     }
 
-    (*m_entities)[0]->applyImpulse(sf::Keyboard::isKeyPressed(sf::Keyboard::D)*elapsedTime
-                                      -sf::Keyboard::isKeyPressed(sf::Keyboard::Q)*elapsedTime,
-                                  (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)*elapsedTime
-                                      -sf::Keyboard::isKeyPressed(sf::Keyboard::S)*elapsedTime));
+    m_entities.front().applyImpulse(sf::Keyboard::isKeyPressed(sf::Keyboard::D)*elapsedTime    //Droite
+                                      -sf::Keyboard::isKeyPressed(sf::Keyboard::Q)*elapsedTime,   //Gauche
+                                  (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)*elapsedTime        //HAUT
+                                      -sf::Keyboard::isKeyPressed(sf::Keyboard::S)*elapsedTime)); //BAS
 }

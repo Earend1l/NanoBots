@@ -16,13 +16,15 @@ class PhysicEngine
     public:
         PhysicEngine();
         virtual ~PhysicEngine();
-        b2Body* addB2Body(std::string entity);
+        b2Body& addB2Body(std::string entity);
         void update(float elapsedTime);
 
     protected:
     private:
-        b2World *m_world;
-        float m_elapsedTime;
+        b2World m_world;
+        float m_elapsedTime=0.0;
+
+        static const b2Vec2 gravity;
 
 };
 

@@ -3,20 +3,20 @@
 
 #include <iostream>
 #include "EntityAdapter.h"
-#include <vector>
+#include <list>
 
 class Renderer
 {
     public:
-        Renderer(std::vector<EntityAdapter*> *entities);
+        Renderer(std::list<EntityAdapter> &entities);
         virtual ~Renderer();
-        sf::RenderWindow* getRenderWindow();
+        sf::RenderWindow &getRenderWindow();
         bool renderOneFrame();
     protected:
     private:
-        sf::RenderWindow* m_window;
+        sf::RenderWindow m_window;
         sf::View m_view;
-        std::vector<EntityAdapter*> *m_entities;
+        std::list<EntityAdapter> &m_entities;
 };
 
 #endif // RENDERER_H

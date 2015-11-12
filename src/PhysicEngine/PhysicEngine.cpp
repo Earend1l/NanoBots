@@ -1,27 +1,19 @@
 #include "PhysicEngine.h"
+const b2Vec2 PhysicEngine::gravity(0, -10);
+
 
 using namespace std;
 
-PhysicEngine::PhysicEngine()
+PhysicEngine::PhysicEngine() : m_world(gravity)
 {
-    #ifdef DEBUG
-        std::cout << __func__ << " called" << std::endl;
-    #endif
-
-    b2Vec2 g;
-    g.x=0.0;
-    g.y=-10.0;
-    m_world = new b2World(g);
-    m_elapsedTime = 0;
 }
 
 PhysicEngine::~PhysicEngine()
 {
     //dtor
-    delete m_world;
 }
 
-b2Body* PhysicEngine::addB2Body(string entityType)
+b2Body& PhysicEngine::addB2Body(string entityType)
 {
     b2BodyDef bodyDef;
     b2PolygonShape dynamicBox;
@@ -53,7 +45,7 @@ b2Body* PhysicEngine::addB2Body(string entityType)
 
         bodyDef.position.Set(0, 0);
         bodyDef.angle=0;
-        b2body = m_world->CreateBody(&bodyDef);
+        b2body = m_world.CreateBody(&bodyDef);
 
         dynamicBox.SetAsBox(boxX, boxY);
         b2FixtureDef fixtureDef;
@@ -67,7 +59,7 @@ b2Body* PhysicEngine::addB2Body(string entityType)
         std::cout<<"PhysicEngine : Box2d file not found" << std::endl;
 
 
-    return b2body;
+    return *b2body;
 }
 
 void PhysicEngine::update(float elapsedTime)
@@ -76,6 +68,6 @@ void PhysicEngine::update(float elapsedTime)
     while (m_elapsedTime > TIME_GAP)
     {
         m_elapsedTime -= TIME_GAP;
-        m_world->Step(TIME_GAP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+        m_world.Step(TIME_GAP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
     }
 }

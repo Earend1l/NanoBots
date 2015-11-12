@@ -2,7 +2,7 @@
 #define RESOURCESMANAGER_H
 
 #include <SFML/Graphics.hpp>
-#include <vector>
+#include <map>
 
 /**
     This class store shared resources like
@@ -18,6 +18,7 @@ class ResourcesManager
         ResourcesManager();
         virtual ~ResourcesManager();
         std::vector<sf::Texture*> m_textures;
+        //std::unordered_map <
 
         static ResourcesManager *instance;
 };

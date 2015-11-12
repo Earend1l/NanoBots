@@ -19,7 +19,7 @@
 class EntityAdapter : public sf::Drawable
 {
     public:
-        EntityAdapter(float positionX, float positionY, float angle, std::string entityName, b2Body* body);
+        EntityAdapter(float positionX, float positionY, float angle, std::string entityName, b2Body& body);
         virtual ~EntityAdapter();
         void draw (sf::RenderTarget &target, sf::RenderStates states) const;
 
@@ -38,7 +38,7 @@ class EntityAdapter : public sf::Drawable
             sf::Texture *m_texture;
 
         //Box2D Adapter
-        b2Body *m_body;
+        b2Body &m_body;
 };
 
 #endif // EntityAdapter_H
