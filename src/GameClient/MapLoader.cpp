@@ -16,6 +16,7 @@ void MapLoader::loadMap(std::string nomFichier)
     sf::Color matterColor = sf::Color::Black;
     sf::Color energyColor = sf::Color::White;
     sf::Color playerColor = sf::Color::Green;
+    sf::Color finish_blockColor = sf::Color::Red;
 
     sf::Image img;
     if (img.loadFromFile(nomFichier))
@@ -35,6 +36,10 @@ void MapLoader::loadMap(std::string nomFichier)
                 else if (img.getPixel(x, y) == playerColor)
                 {
                     m_entityManager.addEntity(x, -1*y, 0, "player");
+                }
+                else if (img.getPixel(x, y) == finish_blockColor)
+                {
+                    m_entityManager.addEntity(x, -1*y, 0, "finish_block");
                 }
             }
         }
