@@ -3,12 +3,7 @@
 
 #include "EntityAdapter.h"
 #include "Renderer.h"
-#include "PlayerController.h"
-#include "EventManager.h"
-#include "MapLoader.h"
 #include "PhysicEngine.h"
-#include "EntityManager.h"
-
 
 #include <vector>
 #include <unordered_map>

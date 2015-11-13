@@ -1,5 +1,11 @@
 #include "GameClient.h"
 
+#include "PlayerController.h"
+#include "EventManager.h"
+#include "MapLoader.h"
+#include "EntityManager.h"
+
+
 GameClient::GameClient() : m_renderer(m_entities)
 {
 }
