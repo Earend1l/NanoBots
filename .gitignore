@@ -1,0 +1,10 @@
+*.dll
+*.exe
+*.o
+*.rar
+*.cbp
+*.depend
+*.layout
+*.cmake
+*.in
+*.txt

@@ -10,6 +10,7 @@ class PlayerController
         virtual ~PlayerController();
 
         void move(float valueX, float valueY);
+        sf::Vector2f getPosition();
 
     protected:
     private:

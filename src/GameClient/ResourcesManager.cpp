@@ -23,7 +23,7 @@ sf::Texture& ResourcesManager::getTexture(std::string entityName)
     if (it == m_textures.end())
     {
         std::string path = "data/entities/"+entityName+"/texture";
-        m_textures.insert(std::make_pair<std::string,sf::Texture>("eggs",sf::Texture()));
+        m_textures.insert(std::make_pair<std::string,sf::Texture>(std::string(entityName),sf::Texture()));
         m_textures[entityName].loadFromFile(path);
     }
 

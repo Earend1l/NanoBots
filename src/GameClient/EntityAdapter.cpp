@@ -1,9 +1,11 @@
 #include "EntityAdapter.h"
+#include "ActionManager.h"
 
 EntityAdapter::EntityAdapter(float positionX, float positionY, float angle, std::string entityName, b2Body& body) :
                             m_body(body),
                             m_texture(ResourcesManager::getInstance().getTexture(entityName)),
-                            m_drawBoundingBox(false)
+                            m_drawBoundingBox(false),
+                            m_name(entityName)
 {
     //Setting up the sprite
     m_sprite.setTexture(m_texture);
@@ -17,6 +19,17 @@ EntityAdapter::~EntityAdapter()
 {
     //dtor
     std::cout << __func__ << " called" <<std::endl;
+}
+
+sf::Vector2f EntityAdapter::getPosition()
+{
+    return sf::Vector2f(m_body.GetPosition().x, m_body.GetPosition().y);
+}
+
+void EntityAdapter::onCollide(EntityAdapter& ent)
+{
+    int action = m_actionsOnCollide[ent.getName()];
+    ActionManager::performAction(*this, ent, action);
 }
 
 void EntityAdapter::draw(sf::RenderTarget &target)
@@ -62,4 +75,14 @@ void EntityAdapter::applyImpulse(float x, float y)
     //Converting into a b2Vec2
     b2Vec2 vec{x, y};
     m_body.ApplyLinearImpulse(vec, m_body.GetWorldCenter(), true);
+}
+
+std::string EntityAdapter::getName()
+{
+    return m_name;
+}
+
+void EntityAdapter::addActionOnCollide(std::string entityName, int actionID)
+{
+    m_actionsOnCollide.insert(std::make_pair<std::string,int>(std::string(entityName),int{actionID}));
 }

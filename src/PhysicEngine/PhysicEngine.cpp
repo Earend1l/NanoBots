@@ -4,8 +4,10 @@ const b2Vec2 PhysicEngine::gravity(0, 0);
 
 using namespace std;
 
-PhysicEngine::PhysicEngine() : m_world(gravity)
+PhysicEngine::PhysicEngine(GameClient& gameClient) : m_world(gravity), m_contactListener(gameClient)
 {
+    m_world.SetAllowSleeping(false);
+    m_world.SetContactListener(&m_contactListener);
 }
 
 PhysicEngine::~PhysicEngine()

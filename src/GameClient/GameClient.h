@@ -2,8 +2,6 @@
 #define GAMECLIENT_H
 
 #include "EntityAdapter.h"
-#include "Renderer.h"
-#include "PhysicEngine.h"
 
 #include <vector>
 #include <unordered_map>

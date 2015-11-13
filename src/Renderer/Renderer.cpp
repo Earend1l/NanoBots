@@ -23,7 +23,7 @@ sf::RenderWindow& Renderer::getRenderWindow()
 
 bool Renderer::renderOneFrame()
 {
-    m_window.clear(sf::Color::White);
+    m_window.clear(sf::Color::Black);
 
     for (auto ent : m_entities)
     {
