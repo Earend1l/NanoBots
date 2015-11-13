@@ -6,7 +6,7 @@
 #include "EntityManager.h"
 
 
-GameClient::GameClient() : m_renderer(m_entities)
+GameClient::GameClient()
 {
 }
 
@@ -16,11 +16,14 @@ GameClient::~GameClient()
 
 void GameClient::start()
 {
-    EntityManager entityManager{m_entities, m_entitiesMap,m_physicEngine};
+    PhysicEngine physicEngine{};
+    Renderer renderer{m_entities};
+
+    EntityManager entityManager{m_entities, m_entitiesMap,physicEngine};
     entityManager.addEntity(1, 1, 0,  "player");
 
     PlayerController playerController{*(m_entities.back())};
-    EventManager eventManager{m_renderer.getRenderWindow(), playerController};
+    EventManager eventManager{renderer.getRenderWindow(), playerController};
 
     MapLoader mapLoader(entityManager);
     mapLoader.loadMap("data/map.bmp");
@@ -30,8 +33,8 @@ void GameClient::start()
     float time = 0;
     while (running)
     {
-        m_physicEngine.update(time);
-        running = m_renderer.renderOneFrame();
+        physicEngine.update(time);
+        running = renderer.renderOneFrame();
         eventManager.processEvent(time);
         time = clock.restart().asSeconds();
     }

@@ -1,4 +1,5 @@
 #include "PhysicEngine.h"
+
 const b2Vec2 PhysicEngine::gravity(0, 0);
 
 using namespace std;

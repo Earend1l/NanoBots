@@ -6,7 +6,6 @@
 #include <iostream>
 #include <string>
 
-
 #define TIME_GAP 1.0/60.0
 #define VELOCITY_ITERATIONS 12
 #define POSITION_ITERATIONS 4

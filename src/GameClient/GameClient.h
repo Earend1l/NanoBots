@@ -21,9 +21,6 @@ class GameClient
     private:
         std::vector<std::shared_ptr<EntityAdapter> > m_entities;
         std::unordered_map <b2Body*, std::shared_ptr<EntityAdapter> > m_entitiesMap;
-
-        PhysicEngine m_physicEngine;
-        Renderer m_renderer;
         bool running=true;
 };
 
