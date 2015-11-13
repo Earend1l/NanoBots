@@ -1,6 +1,6 @@
 #include "GameClient.h"
 
-GameClient::GameClient() : m_playerController(), m_renderer(m_entities), m_eventManager(m_renderer.getRenderWindow(), m_playerController, m_entities)
+GameClient::GameClient() : m_renderer(m_entities)
 {
 }
 
@@ -10,8 +10,11 @@ GameClient::~GameClient()
 
 void GameClient::start()
 {
-    EntityCreator entityCreator(m_entities, m_physicEngine);
+    EntityCreator entityCreator{m_entities, m_entitiesMap,m_physicEngine};
     entityCreator.addEntity(1, 1, 0,  "player");
+
+    PlayerController playerController{*(m_entities.back())};
+    EventManager eventManager{m_renderer.getRenderWindow(), playerController};
 
     MapLoader mapLoader(entityCreator);
     mapLoader.loadMap("data/map.bmp");
@@ -23,7 +26,13 @@ void GameClient::start()
     {
         m_physicEngine.update(time);
         running = m_renderer.renderOneFrame();
-        m_eventManager.processEvent(time);
+        eventManager.processEvent(time);
         time = clock.restart().asSeconds();
     }
+}
+
+
+EntityAdapter& GameClient::getEntity(b2Body& body)
+{
+    return *(m_entitiesMap[&body]);
 }

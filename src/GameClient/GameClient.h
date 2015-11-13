@@ -3,14 +3,15 @@
 
 #include "EntityAdapter.h"
 #include "Renderer.h"
-#include "PhysicEngine.h"
 #include "PlayerController.h"
 #include "EventManager.h"
 #include "MapLoader.h"
+#include "PhysicEngine.h"
 #include "EntityCreator.h"
 
 
-#include <list>
+#include <vector>
+#include <unordered_map>
 
 class GameClient
 {
@@ -18,13 +19,16 @@ class GameClient
         GameClient();
         virtual ~GameClient();
         void start();
+
+        EntityAdapter& getEntity(b2Body& body);
+
     protected:
     private:
-        std::list<EntityAdapter> m_entities;
+        std::vector<std::shared_ptr<EntityAdapter> > m_entities;
+        std::unordered_map <b2Body*, std::shared_ptr<EntityAdapter> > m_entitiesMap;
+
         PhysicEngine m_physicEngine;
         Renderer m_renderer;
-        PlayerController m_playerController;
-        EventManager m_eventManager;
         bool running=true;
 };
 

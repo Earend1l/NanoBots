@@ -3,12 +3,12 @@
 
 #include <iostream>
 #include "EntityAdapter.h"
-#include <list>
+#include <vector>
 
 class Renderer
 {
     public:
-        Renderer(std::list<EntityAdapter> &entities);
+        Renderer(std::vector<std::shared_ptr<EntityAdapter> > &entities);
         virtual ~Renderer();
         sf::RenderWindow &getRenderWindow();
         bool renderOneFrame();
@@ -16,7 +16,7 @@ class Renderer
     private:
         sf::RenderWindow m_window;
         sf::View m_view;
-        std::list<EntityAdapter> &m_entities;
+        std::vector<std::shared_ptr<EntityAdapter> > &m_entities;
 };
 
 #endif // RENDERER_H

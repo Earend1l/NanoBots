@@ -1,7 +1,7 @@
 #include "EventManager.h"
 
-EventManager::EventManager(sf::RenderWindow &window, PlayerController &playerController, std::list<EntityAdapter>& entities) :
-                            m_window(window), m_playerController(playerController), m_entities(entities)
+EventManager::EventManager(sf::RenderWindow &window, PlayerController &playerController) :
+                            m_window(window), m_playerController(playerController)
 {
 
 }
@@ -36,8 +36,6 @@ void EventManager::processEvent(float elapsedTime)
         }
     }
 
-    m_entities.front().applyImpulse(sf::Keyboard::isKeyPressed(sf::Keyboard::D)*elapsedTime    //Droite
-                                      -sf::Keyboard::isKeyPressed(sf::Keyboard::Q)*elapsedTime,   //Gauche
-                                  (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)*elapsedTime        //HAUT
-                                      -sf::Keyboard::isKeyPressed(sf::Keyboard::S)*elapsedTime)); //BAS
+    m_playerController.move((sf::Keyboard::isKeyPressed(sf::Keyboard::D)-sf::Keyboard::isKeyPressed(sf::Keyboard::Q))*elapsedTime,
+                            ((sf::Keyboard::isKeyPressed(sf::Keyboard::Z)-sf::Keyboard::isKeyPressed(sf::Keyboard::S))*elapsedTime));
 }

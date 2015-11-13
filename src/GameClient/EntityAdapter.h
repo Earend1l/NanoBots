@@ -16,12 +16,12 @@
 /*********************************************************************
 **  This class combine the Game's entity, SMFL'drawable and Box2d body
 **********************************************************************/
-class EntityAdapter : public sf::Drawable
+class EntityAdapter
 {
     public:
         EntityAdapter(float positionX, float positionY, float angle, std::string entityName, b2Body& body);
         virtual ~EntityAdapter();
-        void draw (sf::RenderTarget &target, sf::RenderStates states) const;
+        void draw (sf::RenderTarget &target);
 
         void applyImpulse(float x, float y);
         //Update position using the b2body

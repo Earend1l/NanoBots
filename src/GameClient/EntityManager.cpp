@@ -1,18 +1,18 @@
-#include "EntityCreator.h"
+#include "EntityManager.h"
 
-EntityCreator::EntityCreator(std::vector<std::shared_ptr<EntityAdapter> > &entities,
+EntityManager::EntityManager(std::vector<std::shared_ptr<EntityAdapter> > &entities,
                              std::unordered_map <b2Body*, std::shared_ptr<EntityAdapter> > &entitiesMap,
                              PhysicEngine& physicEngine) :
                                  m_entities(entities), m_entitiesMap(entitiesMap),m_physicEngine(physicEngine)
 {
 }
 
-EntityCreator::~EntityCreator()
+EntityManager::~EntityManager()
 {
     //dtor
 }
 
-void EntityCreator::addEntity(float positionX, float positionY, float angle, std::string type)
+void EntityManager::addEntity(float positionX, float positionY, float angle, std::string type)
 {
     b2Body& body= m_physicEngine.addB2Body(type);
     std::shared_ptr<EntityAdapter> pentity (new EntityAdapter(positionX, positionY, angle, type, body));

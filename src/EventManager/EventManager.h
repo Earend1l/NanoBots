@@ -4,13 +4,13 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "PlayerController.h"
-#include <list>
+#include <vector>
 #include "EntityAdapter.h" //TODO delete this line
 
 class EventManager
 {
     public:
-        EventManager(sf::RenderWindow &window, PlayerController &playerController, std::list<EntityAdapter>& entities);
+        EventManager(sf::RenderWindow &window, PlayerController &playerController);
         virtual ~EventManager();
 
         void processEvent(float elapsedTime);
@@ -18,7 +18,6 @@ class EventManager
     private:
         sf::RenderWindow &m_window;
         PlayerController &m_playerController;
-        std::list<EntityAdapter>& m_entities;
 
 };
 

@@ -1,16 +1,17 @@
-#ifndef ENTITYCREATOR_H
-#define ENTITYCREATOR_H
+#ifndef ENTITYMANAGER_H
+#define ENTITYMANAGER_H
 
 #include "PhysicEngine.h"
 #include <Box2D/Box2D.h>
 #include "EntityAdapter.h"
 #include <vector>
+#include <unordered_map>
 
-class EntityCreator
+class EntityManager
 {
     public:
-        EntityCreator(std::vector<std::shared_ptr<EntityAdapter> > &entities, std::unordered_map <b2Body*, std::shared_ptr<EntityAdapter> > &entitiesMap, PhysicEngine& physicEngine);
-        virtual ~EntityCreator();
+        EntityManager(std::vector<std::shared_ptr<EntityAdapter> > &entities, std::unordered_map <b2Body*, std::shared_ptr<EntityAdapter> > &entitiesMap, PhysicEngine& physicEngine);
+        virtual ~EntityManager();
 
         void addEntity(float positionX, float positionY, float angle, std::string type);
     protected:
@@ -20,4 +21,4 @@ class EntityCreator
         PhysicEngine &m_physicEngine;
 };
 
-#endif // ENTITYCREATOR_H
+#endif // ENTITYMANAGER_H

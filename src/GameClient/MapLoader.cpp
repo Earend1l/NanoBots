@@ -38,7 +38,6 @@ void MapLoader::loadMap(std::string nomFichier)
                 }
             }
         }
-
     }
     else
     {

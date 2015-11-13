@@ -1,6 +1,5 @@
 #include "PhysicEngine.h"
-const b2Vec2 PhysicEngine::gravity(0, -10);
-
+const b2Vec2 PhysicEngine::gravity(0, 0);
 
 using namespace std;
 
@@ -57,7 +56,6 @@ b2Body& PhysicEngine::addB2Body(string entityType)
     }
     else
         std::cout<<"PhysicEngine : Box2d file not found" << std::endl;
-
 
     return *b2body;
 }

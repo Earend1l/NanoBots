@@ -1,6 +1,6 @@
 #include "Renderer.h"
 
-Renderer::Renderer(std::list<EntityAdapter> &entities) : m_entities(entities), m_window(sf::VideoMode(1024, 768), "NanoBots")
+Renderer::Renderer(std::vector<std::shared_ptr<EntityAdapter> > &entities) : m_entities(entities), m_window(sf::VideoMode(1024, 768), "NanoBots")
 {
     //ctor
     m_window.setVerticalSyncEnabled(true);
@@ -25,11 +25,11 @@ bool Renderer::renderOneFrame()
 {
     m_window.clear(sf::Color::White);
 
-    for (std::list<EntityAdapter>::iterator ent=m_entities.begin() ; ent!=m_entities.end() ; ++ent)
+    for (auto ent : m_entities)
     {
-        ent->updatePos();
-        m_window.draw(*ent);
+        ent->draw(m_window);
     }
+
     m_window.display();
 
     return m_window.isOpen();
