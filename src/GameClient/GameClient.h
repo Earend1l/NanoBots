@@ -7,7 +7,7 @@
 #include "EventManager.h"
 #include "MapLoader.h"
 #include "PhysicEngine.h"
-#include "EntityCreator.h"
+#include "EntityManager.h"
 
 
 #include <vector>

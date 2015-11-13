@@ -10,13 +10,13 @@ GameClient::~GameClient()
 
 void GameClient::start()
 {
-    EntityCreator entityCreator{m_entities, m_entitiesMap,m_physicEngine};
-    entityCreator.addEntity(1, 1, 0,  "player");
+    EntityManager entityManager{m_entities, m_entitiesMap,m_physicEngine};
+    entityManager.addEntity(1, 1, 0,  "player");
 
     PlayerController playerController{*(m_entities.back())};
     EventManager eventManager{m_renderer.getRenderWindow(), playerController};
 
-    MapLoader mapLoader(entityCreator);
+    MapLoader mapLoader(entityManager);
     mapLoader.loadMap("data/map.bmp");
 
     sf::Clock clock;

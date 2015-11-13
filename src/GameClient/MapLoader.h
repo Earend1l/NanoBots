@@ -2,17 +2,17 @@
 #define MAPLOADER_H
 
 #include <SFML/Graphics.hpp>
-#include "EntityCreator.h"
+#include "EntityManager.h"
 
 class MapLoader
 {
     public:
-        MapLoader(EntityCreator &entityCreator);
+        MapLoader(EntityManager &entityManager);
         void loadMap(std::string nomFichier);
         virtual ~MapLoader();
     protected:
     private:
-        EntityCreator &m_entityCreator;
+        EntityManager &m_entityManager;
 };
 
 #endif // MAPLOADER_H
