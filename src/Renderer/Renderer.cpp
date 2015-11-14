@@ -1,14 +1,9 @@
 #include "Renderer.h"
 
-Renderer::Renderer(std::vector<std::shared_ptr<Entity> > &entities) : m_entities(entities), m_window(sf::VideoMode(1024, 768), "NanoBots")
+Renderer::Renderer(std::vector<std::shared_ptr<Entity> > &entities) : m_entities(entities), m_window(sf::VideoMode::getFullscreenModes()[0], "NanoBots", sf::Style::Fullscreen)
 {
     //ctor
     m_window.setVerticalSyncEnabled(true);
-
-    m_view.setCenter(0, 0);
-    m_view.setSize(m_window.getSize().x*4, m_window.getSize().y*4);
-    m_view.move(2000, 1000);
-    m_window.setView(m_view);
 }
 
 Renderer::~Renderer()

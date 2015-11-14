@@ -9,8 +9,8 @@
 #include "ContactListener.h"
 
 #define TIME_GAP 1.0/60.0
-#define VELOCITY_ITERATIONS 12
-#define POSITION_ITERATIONS 4
+#define VELOCITY_ITERATIONS 6
+#define POSITION_ITERATIONS 2
 
 class PhysicEngine
 {

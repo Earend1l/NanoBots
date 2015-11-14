@@ -16,8 +16,13 @@ class EventManager
         void processEvent(float elapsedTime);
     protected:
     private:
+        void updateView(float elapsedTime);
+
         sf::RenderWindow &m_window;
+        sf::View m_view;
         PlayerController &m_playerController;
+
+        float viewSpeed = 10;
 
 };
 

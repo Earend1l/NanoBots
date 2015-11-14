@@ -42,7 +42,7 @@ void GameClient::start()
     //TEST : TODO delete
     Race::loadMode();
 
-    m_entityManager.addEntity(1, 1, 0,  "player");
+    m_entityManager.addEntity(3, -3, 0,  "player");
 
     PlayerController playerController{*(m_entities.back())};
     EventManager eventManager{m_renderer.getRenderWindow(), playerController};
@@ -56,8 +56,8 @@ void GameClient::start()
     while (running)
     {
         m_physicEngine.update(time);
-        running = m_renderer.renderOneFrame();
         eventManager.processEvent(time);
+        running = m_renderer.renderOneFrame();
         time = clock.restart().asSeconds();
     }
 }
