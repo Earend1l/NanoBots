@@ -1,6 +1,7 @@
 #include "ContactListener.h"
+#include "GameClient.h"
 
-ContactListener::ContactListener(GameClient& gameClient) : m_gameClient(gameClient)
+ContactListener::ContactListener()
 {
     //ctor
 }
@@ -11,13 +12,16 @@ ContactListener::~ContactListener()
 }
 
 void ContactListener::BeginContact(b2Contact* contact) {
+    //Getting a reference to the game client
+    GameClient& gameClient = GameClient::getInstance();
 
-    //Get the b2body
+    //Get the concerned entities
     b2Body* body1 = contact->GetFixtureA()->GetBody();
-    EntityAdapter& ent1 = m_gameClient.getEntity(*body1);
+    Entity& ent1 = gameClient.getEntity(body1);
     b2Body* body2 = contact->GetFixtureB()->GetBody();
-    EntityAdapter& ent2 = m_gameClient.getEntity(*body2);
+    Entity& ent2 = gameClient.getEntity(body2);
 
+    //Notify entities of the collision
     ent1.onCollide(ent2);
     ent2.onCollide(ent1);
 }

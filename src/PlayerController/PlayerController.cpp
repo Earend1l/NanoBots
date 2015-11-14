@@ -1,6 +1,6 @@
 #include "PlayerController.h"
 
-PlayerController::PlayerController(EntityAdapter& entity) : m_entity(entity)
+PlayerController::PlayerController(Entity& entity) : m_entity(entity)
 {
     //ctor
 }

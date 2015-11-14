@@ -1,14 +1,16 @@
 #ifndef RACE_H
 #define RACE_H
 
-#include "EntityAdapter.h"
+#include "Entity.h"
 
 class Race
 {
     public:
         Race();
-        std::shared_ptr<EntityAdapter> createFinishBlock(float positionX, float positionY, float angle, b2Body& body);
         virtual ~Race();
+        static void loadMode();
+
+        static std::shared_ptr<Entity> createFinishBlock(float positionX, float positionY, float angle, b2Body* body);
     protected:
     private:
 };

@@ -1,5 +1,5 @@
-#ifndef EntityAdapter_H
-#define EntityAdapter_H
+#ifndef Entity_H
+#define Entity_H
 
 #include <iostream>
 #include <string>
@@ -15,18 +15,19 @@
 /*********************************************************************
 **  This class combine the Game's entity, SMFL'drawable and Box2d body
 **********************************************************************/
-class EntityAdapter
+class Entity
 {
     public:
-        EntityAdapter(float positionX, float positionY, float angle, std::string entityName, b2Body& body);
-        virtual ~EntityAdapter();
+        Entity(float positionX, float positionY, float angle, std::string entityName, b2Body* body);
+        virtual ~Entity();
         void draw (sf::RenderTarget &target);
         sf::Vector2f getPosition();
 
 
         void applyImpulse(float x, float y);
-        void onCollide(EntityAdapter& ent);
+        void onCollide(Entity& ent);
         void addActionOnCollide(std::string entityName, int actionID);
+        void setColor(sf::Color color);
 
         std::string getName();
 
@@ -46,7 +47,7 @@ class EntityAdapter
             sf::Texture &m_texture;
 
         //Box2D Adapter
-        b2Body &m_body;
+        b2Body *m_body;
 };
 
-#endif // EntityAdapter_H
+#endif // Entity_H

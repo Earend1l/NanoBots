@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    GameClient game;
+    GameClient& game = GameClient::getInstance();
     game.start();
     return 0;
 }

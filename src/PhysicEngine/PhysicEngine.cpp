@@ -1,10 +1,10 @@
 #include "PhysicEngine.h"
 
-const b2Vec2 PhysicEngine::gravity(0, 0);
+const b2Vec2 PhysicEngine::gravity(0, -10);
 
 using namespace std;
 
-PhysicEngine::PhysicEngine(GameClient& gameClient) : m_world(gravity), m_contactListener(gameClient)
+PhysicEngine::PhysicEngine() : m_world(gravity), m_contactListener()
 {
     m_world.SetAllowSleeping(false);
     m_world.SetContactListener(&m_contactListener);
@@ -15,7 +15,7 @@ PhysicEngine::~PhysicEngine()
     //dtor
 }
 
-b2Body& PhysicEngine::addB2Body(string entityType)
+b2Body* PhysicEngine::addB2Body(string entityType)
 {
     b2BodyDef bodyDef;
     b2PolygonShape dynamicBox;
@@ -47,6 +47,9 @@ b2Body& PhysicEngine::addB2Body(string entityType)
 
         bodyDef.position.Set(0, 0);
         bodyDef.angle=0;
+        bodyDef.linearDamping = 0.5f;
+        bodyDef.angularDamping = 0.3f;
+
         b2body = m_world.CreateBody(&bodyDef);
 
         dynamicBox.SetAsBox(boxX, boxY);
@@ -60,7 +63,7 @@ b2Body& PhysicEngine::addB2Body(string entityType)
     else
         std::cout<<"PhysicEngine : Box2d file not found" << std::endl;
 
-    return *b2body;
+    return b2body;
 }
 
 void PhysicEngine::update(float elapsedTime)

@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "PlayerController.h"
 #include <vector>
-#include "EntityAdapter.h" //TODO delete this line
+#include "Entity.h" //TODO delete this line
 
 class EventManager
 {

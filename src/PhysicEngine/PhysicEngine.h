@@ -6,7 +6,6 @@
 #include <iostream>
 #include <string>
 
-#include "GameClient.h"
 #include "ContactListener.h"
 
 #define TIME_GAP 1.0/60.0
@@ -16,9 +15,9 @@
 class PhysicEngine
 {
     public:
-        PhysicEngine(GameClient &gameClient);
+        PhysicEngine();
         virtual ~PhysicEngine();
-        b2Body& addB2Body(std::string entity);
+        b2Body* addB2Body(std::string entity);
         void update(float elapsedTime);
 
     protected:

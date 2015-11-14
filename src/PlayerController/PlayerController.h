@@ -1,12 +1,12 @@
 #ifndef PLAYERCONTROLLER_H
 #define PLAYERCONTROLLER_H
 
-#include "EntityAdapter.h"
+#include "Entity.h"
 
 class PlayerController
 {
     public:
-        PlayerController(EntityAdapter& entity);
+        PlayerController(Entity& entity);
         virtual ~PlayerController();
 
         void move(float valueX, float valueY);
@@ -14,7 +14,7 @@ class PlayerController
 
     protected:
     private:
-        EntityAdapter& m_entity;
+        Entity& m_entity;
 };
 
 #endif // PLAYERCONTROLLER_H

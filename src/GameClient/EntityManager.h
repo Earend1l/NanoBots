@@ -3,22 +3,34 @@
 
 #include "PhysicEngine.h"
 #include <Box2D/Box2D.h>
-#include "EntityAdapter.h"
+#include "Entity.h"
 #include <vector>
 #include <unordered_map>
+
+//Entity creator functions
+typedef std::function <std::shared_ptr<Entity> (float positionX, float positionY, float angle, b2Body* body)> entityCreator;
 
 class EntityManager
 {
     public:
-        EntityManager(std::vector<std::shared_ptr<EntityAdapter> > &entities, std::unordered_map <b2Body*, std::shared_ptr<EntityAdapter> > &entitiesMap, PhysicEngine& physicEngine);
+        EntityManager(std::vector<std::shared_ptr<Entity> > &entities, std::unordered_map <b2Body*, std::shared_ptr<Entity> > &entitiesMap, PhysicEngine& physicEngine);
         virtual ~EntityManager();
 
-        void addEntity(float positionX, float positionY, float angle, std::string type);
+        void addEntity(float positionX, float positionY, float angle, std::string entityName);
+        void addEntityConstructor(std::string entityName, entityCreator entC);
     protected:
     private:
-        std::vector<std::shared_ptr<EntityAdapter> > &m_entities;
-        std::unordered_map <b2Body*, std::shared_ptr<EntityAdapter> > &m_entitiesMap;
+        //Components :
         PhysicEngine &m_physicEngine;
+
+        //vector of all entities created
+        std::vector<std::shared_ptr<Entity> > &m_entities;
+
+        //Map used to get entities is constant time using it b2body
+        std::unordered_map <b2Body*, std::shared_ptr<Entity> > &m_entitiesMap;
+
+        //Map pairing an entity's name with it constructor
+        std::unordered_map <std::string, entityCreator > m_entityCreators;
 };
 
 #endif // ENTITYMANAGER_H

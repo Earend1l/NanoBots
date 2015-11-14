@@ -1,6 +1,6 @@
 #include "Renderer.h"
 
-Renderer::Renderer(std::vector<std::shared_ptr<EntityAdapter> > &entities) : m_entities(entities), m_window(sf::VideoMode(1024, 768), "NanoBots")
+Renderer::Renderer(std::vector<std::shared_ptr<Entity> > &entities) : m_entities(entities), m_window(sf::VideoMode(1024, 768), "NanoBots")
 {
     //ctor
     m_window.setVerticalSyncEnabled(true);

@@ -2,13 +2,12 @@
 #define CONTACTLISTENER_H
 
 #include "Box2D/Box2D.h"
-#include "EntityAdapter.h"
-#include "GameClient.h"
+#include "Entity.h"
 
 class ContactListener : public b2ContactListener
 {
     public:
-        ContactListener(GameClient& gameClient);
+        ContactListener();
         virtual ~ContactListener();
 
         void BeginContact(b2Contact* contact);
@@ -16,7 +15,6 @@ class ContactListener : public b2ContactListener
 
     protected:
     private:
-        GameClient& m_gameClient;
 };
 
 #endif // CONTACTLISTENER_H

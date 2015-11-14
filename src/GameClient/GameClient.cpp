@@ -3,9 +3,11 @@
 #include "PlayerController.h"
 #include "EventManager.h"
 #include "MapLoader.h"
-#include "EntityManager.h"
-#include "Renderer.h"
-#include "PhysicEngine.h"
+
+//TEST : TODO delete
+#include "Race.h"
+
+GameClient * GameClient::p_instance = nullptr;
 
 GameClient::GameClient()
 {
@@ -15,17 +17,37 @@ GameClient::~GameClient()
 {
 }
 
+GameClient::GameClient(const GameClient& rs)
+{
+    p_instance = rs.p_instance;
+}
+
+GameClient& GameClient::operator = (const GameClient& rs)
+{
+    if (this != &rs) {
+        p_instance = rs.p_instance;
+    }
+       return *this;
+}
+
+GameClient& GameClient::getInstance()
+{
+    static GameClient instance;
+    p_instance = &instance;
+    return *p_instance;
+}
+
 void GameClient::start()
 {
-    PhysicEngine physicEngine{*this};
-    Renderer renderer{m_entities};
-    EntityManager entityManager{m_entities, m_entitiesMap,physicEngine};
-    entityManager.addEntity(1, 1, 0,  "player");
+    //TEST : TODO delete
+    Race::loadMode();
+
+    m_entityManager.addEntity(1, 1, 0,  "player");
 
     PlayerController playerController{*(m_entities.back())};
-    EventManager eventManager{renderer.getRenderWindow(), playerController};
+    EventManager eventManager{m_renderer.getRenderWindow(), playerController};
 
-    MapLoader mapLoader{entityManager};
+    MapLoader mapLoader{m_entityManager};
     mapLoader.loadMap("data/map.bmp");
 
     sf::Clock clock{};
@@ -33,15 +55,20 @@ void GameClient::start()
     float time = 0;
     while (running)
     {
-        physicEngine.update(time);
-        running = renderer.renderOneFrame();
+        m_physicEngine.update(time);
+        running = m_renderer.renderOneFrame();
         eventManager.processEvent(time);
         time = clock.restart().asSeconds();
     }
 }
 
 
-EntityAdapter& GameClient::getEntity(b2Body& body)
+Entity& GameClient::getEntity(b2Body* body)
 {
-    return *(m_entitiesMap[&body]);
+    return *(m_entitiesMap[body]);
+}
+
+EntityManager& GameClient::getEntityManager()
+{
+    return m_entityManager;
 }
