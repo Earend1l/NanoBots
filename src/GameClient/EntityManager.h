@@ -6,6 +6,7 @@
 #include "Entity.h"
 #include <vector>
 #include <unordered_map>
+#include <list>
 
 //Entity creator functions
 typedef std::function <std::shared_ptr<Entity> (float positionX, float positionY, float angle, b2Body* body)> entityCreator;
@@ -18,6 +19,8 @@ class EntityManager
 
         void addEntity(float positionX, float positionY, float angle, std::string entityName);
         void addEntityConstructor(std::string entityName, entityCreator entC);
+
+        void update();
     protected:
     private:
         //Components :
@@ -31,6 +34,16 @@ class EntityManager
 
         //Map pairing an entity's name with it constructor
         std::unordered_map <std::string, entityCreator > m_entityCreators;
+
+
+        struct EntityToCreate {
+            float positionX;
+            float positionY;
+            float angle;
+            std::string entityName;
+        };
+        //List of the entity tot create the next frame
+        std::list<EntityToCreate> m_entitiesToCreate;
 };
 
 #endif // ENTITYMANAGER_H

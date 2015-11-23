@@ -18,6 +18,7 @@ void ActionManager::performAction(Entity& sender, Entity& target, int actionID)
     {
         target.setColor(sf::Color(0, 128, 255));
         std::cout << sender.getName() << " :  quelqu'un a gagne ! Je le fous en bleu maggle." << std::endl;
+        GameClient::getInstance().getEntityManager().addEntity(0,0, 0, "player");
     }
 
         //Impossible de créer un objet durant une step du moteur physique !

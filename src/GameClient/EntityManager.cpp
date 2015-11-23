@@ -14,26 +14,42 @@ EntityManager::~EntityManager()
 
 void EntityManager::addEntity(float positionX, float positionY, float angle, std::string entityName)
 {
-    //Creating the physical body
-    b2Body* body= m_physicEngine.addB2Body(entityName);
 
-
-    std::shared_ptr<Entity> pentity;
-    //Creating the entity
-    if (entityCreator entC = m_entityCreators[entityName])
-    {
-        pentity = std::shared_ptr<Entity>(entC(positionX, positionY, angle, body));
+    if (m_physicEngine.isLocked()){
+        EntityToCreate ent{positionX, positionY, angle, entityName};
+        m_entitiesToCreate.push_back(ent);
     }
-    else
-    {
-        std::cout << "EntityManager : using default entity constructor for " << entityName << std::endl;
-        pentity = std::shared_ptr<Entity>(new Entity(positionX, positionY, angle, std::string (entityName), body));
+    else {
+        //Creating the physical body
+        b2Body* body=m_physicEngine.addB2Body(entityName);
+
+        //Creating the entity
+        std::shared_ptr<Entity> pentity;
+        if (entityCreator entC = m_entityCreators[entityName])
+        {
+            pentity = std::shared_ptr<Entity>(entC(positionX, positionY, angle, body));
+        }
+        else
+        {
+            std::cout << "EntityManager : using default entity constructor for " << entityName << std::endl;
+            pentity = std::shared_ptr<Entity>(new Entity(positionX, positionY, angle, std::string (entityName), body));
+        }
+
+        //Adding the entity to the map
+        m_entities.push_back(pentity);
+        m_entitiesMap.insert(std::make_pair<b2Body*, std::shared_ptr<Entity> >(&*body,std::shared_ptr<Entity>(pentity)));
     }
+}
 
-
-    //Adding the entity to the map
-    m_entities.push_back(pentity);
-    m_entitiesMap.insert(std::make_pair<b2Body*, std::shared_ptr<Entity> >(&*body,std::shared_ptr<Entity>(pentity)));
+void EntityManager::update()
+{
+    while (!m_entitiesToCreate.empty())
+    {
+        EntityToCreate ent = m_entitiesToCreate.back();
+        addEntity(ent.positionX, ent.positionY, ent.angle, ent.entityName);
+        m_entitiesToCreate.pop_back();
+    }
+    std::flush(std::cout);
 }
 
 void EntityManager::addEntityConstructor(std::string entityName, entityCreator entC)

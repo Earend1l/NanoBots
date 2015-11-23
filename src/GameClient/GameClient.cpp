@@ -59,6 +59,7 @@ void GameClient::start()
         eventManager.processEvent(time);
         running = m_renderer.renderOneFrame();
         time = clock.restart().asSeconds();
+        m_entityManager.update();
     }
 }
 

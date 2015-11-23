@@ -61,10 +61,6 @@ void EventManager::updateView(float elapsedTime)
     float dx = m_playerController.getPosition().x * PIXELS_PER_METER - m_view.getCenter().x;
     float dy = -1.0* m_playerController.getPosition().y * PIXELS_PER_METER - m_view.getCenter().y;
 
-std::cout << m_view.getSize().x << dy << ", time=" << elapsedTime << std::endl;
-
-    //m_view.setCenter(m_playerController.getPosition().x * PIXELS_PER_METER, -1.0* m_playerController.getPosition().y * PIXELS_PER_METER);
-
     if (abs(dx)>m_view.getSize().x/10)
     {
         m_view.move(3000.f * dx * elapsedTime / m_view.getSize().x, 0);

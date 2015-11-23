@@ -19,6 +19,7 @@ class PhysicEngine
         virtual ~PhysicEngine();
         b2Body* addB2Body(std::string entity);
         void update(float elapsedTime);
+        bool isLocked();
 
     protected:
     private:

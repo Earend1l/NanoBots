@@ -1,8 +1,8 @@
 #include "Renderer.h"
 
-Renderer::Renderer(std::vector<std::shared_ptr<Entity> > &entities) : m_entities(entities), m_window(sf::VideoMode::getFullscreenModes()[0], "NanoBots", sf::Style::Fullscreen)
+Renderer::Renderer(std::vector<std::shared_ptr<Entity> > &entities) : m_entities(entities), m_window(sf::VideoMode(1200, 800), "NanoBots")
 {
-    //ctor
+    //ctorm_window(sf::VideoMode::getFullscreenModes()[0]
     m_window.setVerticalSyncEnabled(true);
 }
 

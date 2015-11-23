@@ -75,3 +75,8 @@ void PhysicEngine::update(float elapsedTime)
         m_world.Step(TIME_GAP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
     }
 }
+
+bool PhysicEngine::isLocked()
+{
+    return m_world.IsLocked();
+}

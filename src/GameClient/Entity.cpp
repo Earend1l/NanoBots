@@ -20,7 +20,6 @@ Entity::Entity(float positionX, float positionY, float angle, std::string entity
 Entity::~Entity()
 {
     //dtor
-    std::cout << __func__ << " called" <<std::endl;
 }
 
 sf::Vector2f Entity::getPosition()
