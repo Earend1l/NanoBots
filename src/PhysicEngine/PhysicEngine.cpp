@@ -36,11 +36,15 @@ b2Body* PhysicEngine::addB2Body(string entityType)
             if (str=="DYNAMIC_BODY"){
                     bodyDef.type = b2_dynamicBody;
                     density=1;}
-            if (str=="STATIC_BODY") {bodyDef.type = b2_staticBody;}
-            if (str=="SIZE")
+            else if (str=="STATIC_BODY") {bodyDef.type = b2_staticBody;}
+            else if (str=="SIZE")
             {
                 file  >> boxX;
                 file >> boxY;
+            }
+            else if (str=="BULLET")
+            {
+                bodyDef.bullet = true;
             }
         } while(str!="END");
         file.close();
