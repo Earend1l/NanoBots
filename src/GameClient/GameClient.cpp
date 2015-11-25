@@ -42,7 +42,7 @@ void GameClient::start()
     //TEST : TODO delete
     Race::loadMode();
 
-    m_entityManager.addEntity(50, -50, 0,  "player");
+    m_entityManager.addEntity(50, -50, 0, 0, 0, "player");
 
     PlayerController playerController{*(m_entities.back())};
     EventManager eventManager{m_renderer.getRenderWindow(), playerController};

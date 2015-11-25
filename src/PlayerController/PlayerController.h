@@ -11,6 +11,7 @@ class PlayerController
 
         void move(float valueX, float valueY);
         sf::Vector2f getPosition();
+        void primaryAction(sf::Vector2f mousePosition);
 
     protected:
     private:

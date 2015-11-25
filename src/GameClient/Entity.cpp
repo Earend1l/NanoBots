@@ -27,6 +27,16 @@ sf::Vector2f Entity::getPosition()
     return sf::Vector2f(m_body->GetPosition().x, m_body->GetPosition().y);
 }
 
+sf::Vector2f Entity::getVelocity()
+{
+    return sf::Vector2f(m_body->GetLinearVelocity().x, m_body->GetLinearVelocity().y);
+}
+
+float Entity::getAngle()
+{
+    return m_body->GetAngle();
+}
+
 void Entity::onCollide(Entity& ent)
 {
     int action = m_actionsOnCollide[ent.getName()];

@@ -12,11 +12,11 @@ EntityManager::~EntityManager()
     //dtor
 }
 
-void EntityManager::addEntity(float positionX, float positionY, float angle, std::string entityName)
+void EntityManager::addEntity(float positionX, float positionY, float angle, float speedX, float speedY, std::string entityName)
 {
 
     if (m_physicEngine.isLocked()){
-        EntityToCreate ent{positionX, positionY, angle, entityName};
+        EntityToCreate ent{positionX, positionY, angle, speedX, speedY, entityName};
         m_entitiesToCreate.push_back(ent);
     }
     else {
@@ -35,6 +35,7 @@ void EntityManager::addEntity(float positionX, float positionY, float angle, std
             pentity = std::shared_ptr<Entity>(new Entity(positionX, positionY, angle, std::string (entityName), body));
         }
 
+        body->ApplyLinearImpulse(b2Vec2(speedX, speedY), body->GetWorldCenter(), true);
         //Adding the entity to the map
         m_entities.push_back(pentity);
         m_entitiesMap.insert(std::make_pair<b2Body*, std::shared_ptr<Entity> >(&*body,std::shared_ptr<Entity>(pentity)));
@@ -46,7 +47,7 @@ void EntityManager::update()
     while (!m_entitiesToCreate.empty())
     {
         EntityToCreate ent = m_entitiesToCreate.back();
-        addEntity(ent.positionX, ent.positionY, ent.angle, ent.entityName);
+        addEntity(ent.positionX, ent.positionY, ent.angle,ent.speedX, ent.speedY, ent.entityName);
         m_entitiesToCreate.pop_back();
     }
     std::flush(std::cout);

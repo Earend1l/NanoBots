@@ -17,7 +17,7 @@ class EntityManager
         EntityManager(std::vector<std::shared_ptr<Entity> > &entities, std::unordered_map <b2Body*, std::shared_ptr<Entity> > &entitiesMap, PhysicEngine& physicEngine);
         virtual ~EntityManager();
 
-        void addEntity(float positionX, float positionY, float angle, std::string entityName);
+        void addEntity(float positionX, float positionY, float angle, float speedX, float speedY, std::string entityName);
         void addEntityConstructor(std::string entityName, entityCreator entC);
 
         void update();
@@ -40,6 +40,8 @@ class EntityManager
             float positionX;
             float positionY;
             float angle;
+            float speedX;
+            float speedY;
             std::string entityName;
         };
         //List of the entity tot create the next frame

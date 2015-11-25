@@ -17,6 +17,7 @@ void MapLoader::loadMap(std::string nomFichier)
     sf::Color energyColor = sf::Color::White;
     sf::Color playerColor = sf::Color::Green;
     sf::Color finish_blockColor = sf::Color::Red;
+    sf::Color towerTestColor = sf::Color::Yellow;
 
     sf::Image img;
     if (img.loadFromFile(nomFichier))
@@ -27,19 +28,23 @@ void MapLoader::loadMap(std::string nomFichier)
             {
                 if (img.getPixel(x, y) == matterColor)
                 {
-                    m_entityManager.addEntity(x, -1*y, 0, "matter");
+                    m_entityManager.addEntity(x, -1*y, 0, 0 , 0, "matter");
                 }
                 else if (img.getPixel(x, y) == energyColor)
                 {
-                    m_entityManager.addEntity(x, -1*y, 0, "energy");
+                    m_entityManager.addEntity(x, -1*y, 0, 0 , 0, "energy");
                 }
                 else if (img.getPixel(x, y) == playerColor)
                 {
-                    m_entityManager.addEntity(x, -1*y, 0, "player");
+                    m_entityManager.addEntity(x, -1*y, 0, 0 , 0, "player");
                 }
                 else if (img.getPixel(x, y) == finish_blockColor)
                 {
-                    m_entityManager.addEntity(x, -1*y, 0, "finish_block");
+                    m_entityManager.addEntity(x, -1*y, 0, 0 , 0, "finish_block");
+                }
+                else if (img.getPixel(x, y) == towerTestColor)
+                {
+                    m_entityManager.addEntity(x, -1*y, 0, 0 , 0, "towerTest");
                 }
             }
         }

@@ -1,4 +1,5 @@
 #include "PlayerController.h"
+#include "ActionManager.h"
 
 PlayerController::PlayerController(Entity& entity) : m_entity(entity)
 {
@@ -18,4 +19,9 @@ void PlayerController::move(float valueX, float valueY)
 sf::Vector2f PlayerController::getPosition()
 {
     return m_entity.getPosition();
+}
+
+void PlayerController::primaryAction(sf::Vector2f mousePosition)
+{
+    ActionManager::performEntitySpellAction("shootBasicBullet", m_entity, mousePosition);
 }

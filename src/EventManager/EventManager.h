@@ -14,6 +14,7 @@ class EventManager
         virtual ~EventManager();
 
         void processEvent(float elapsedTime);
+        sf::Vector2f getGameMousePosition(float x, float y);
     protected:
     private:
         void updateView(float elapsedTime);

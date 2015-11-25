@@ -44,6 +44,18 @@ void EventManager::processEvent(float elapsedTime)
                 m_view.zoom(1 - 0.1*event.mouseWheel.delta);
                 break;
 
+            case sf::Event::MouseButtonPressed:
+                switch (event.mouseButton.button)
+                {
+                    case sf::Mouse::Right:
+                        m_playerController.primaryAction(getGameMousePosition(event.mouseButton.x, event.mouseButton.y));
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+
             // we don't process other types of events
             default:
                 break;
@@ -72,4 +84,10 @@ void EventManager::updateView(float elapsedTime)
 
 
     m_window.setView(m_view);
+}
+
+sf::Vector2f EventManager::getGameMousePosition(float x, float y)
+{
+    return sf::Vector2f((x*(m_view.getSize().x / m_window.getSize().x)+m_view.getCenter().x-m_view.getSize().x/2)/PIXELS_PER_METER,
+                        -1*(y*(m_view.getSize().y / m_window.getSize().y)+m_view.getCenter().y-m_view.getSize().y/2)/PIXELS_PER_METER);
 }

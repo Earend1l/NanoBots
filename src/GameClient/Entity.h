@@ -28,6 +28,8 @@ class Entity
         void onCollide(Entity& ent);
         void addActionOnCollide(std::string entityName, int actionID);
         void setColor(sf::Color color);
+        float getAngle();
+        sf::Vector2f getVelocity();
 
         std::string getName();
 
